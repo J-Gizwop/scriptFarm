@@ -144,36 +144,7 @@ function comma_value(p1)
 	return value;
 end;
 ----------------endMap & ID Map
-local plr = game:GetService("Players").LocalPlayer
-if plr and plr:FindFirstChild("PlayerGui") then
-    local hatchInfo = plr.PlayerGui:FindFirstChild("HatchInfo")
 
-    if hatchInfo then
-        local holder = hatchInfo:FindFirstChild("holder")
-
-        if holder then
-            local info1 = holder:FindFirstChild("info1")
-
-            if info1 then
-                local unitName = info1:FindFirstChild("UnitName")
-
-                if unitName then
-                    unitName.Text = getgenv().item
-                else
-                    warn("UnitName not found in info1")
-                end
-            else
-                warn("info1 not found in holder")
-            end
-        else
-            warn("holder not found in HatchInfo")
-        end
-    else
-        warn("HatchInfo not found in PlayerGui")
-    end
-else
-    warn("PlayerGui not found for player")
-end
 
 function webhook()
     if Settings.WebhookEnabled then
