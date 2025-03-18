@@ -15,6 +15,35 @@ else
 end
 
 ------------------------------
+-- Toggle for Joining Lobby
+local ToggleJoinLobby = false -- Default: OFF
+
+local function JoinLobby()
+    if ToggleJoinLobby then
+        local args = {
+            [1] = "_lobbytemplate_event3"
+        }
+        game:GetService("ReplicatedStorage"):WaitForChild("endpoints"):WaitForChild("client_to_server"):WaitForChild("request_join_lobby"):InvokeServer(unpack(args))
+        print("Joined Lobby!")
+    end
+end
+
+-- Example: Toggle activation with a keybind
+local UserInputService = game:GetService("UserInputService")
+UserInputService.InputBegan:Connect(function(input, gameProcessed)
+    if gameProcessed then return end
+    
+    if input.KeyCode == Enum.KeyCode.L then -- Press 'L' to toggle
+        ToggleJoinLobby = not ToggleJoinLobby
+        print("Join Lobby Toggle: " .. tostring(ToggleJoinLobby))
+        
+        if ToggleJoinLobby then
+            JoinLobby()
+        end
+    end
+end)
+
+------------------------------
 local a = 'V2_Anime_Adventures' -- Folder Name
 local b = game:GetService('Players').LocalPlayer.Name .. '_AnimeAdventures.json' 
 Settings = {}
